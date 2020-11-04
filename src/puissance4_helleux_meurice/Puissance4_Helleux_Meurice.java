@@ -54,6 +54,7 @@ public class Puissance4_Helleux_Meurice {
         */
         Partie partie= new Partie ();
         partie.debuterPartie();
+        
     }
     
 }

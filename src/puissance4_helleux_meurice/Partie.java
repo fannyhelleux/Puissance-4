@@ -103,22 +103,22 @@ public class Partie {
         initialiserPartie();
         Scanner sc = new Scanner(System.in);
         int nb= 0;     
-        System.out.println(listeJoueurs[0]+ " est "+listeJoueurs[0].couleur);
-        System.out.println(listeJoueurs[1]+ " est "+listeJoueurs[1].couleur);        
+        System.out.println(listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
+        System.out.println(listeJoueurs[1].nom+ " est "+listeJoueurs[1].couleur);        
         while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
             int compteur = 0; // permet de controler le changement de joueur
             joueurCourant=listeJoueurs[nb%2];
             System.out.println("\n\nC'est à " + joueurCourant.nom + " de jouer!"); 
-            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur.");
+            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur.\n");
             grille.afficherGrilleSurConsole();
-            System.out.println("Que veux tu faire?");
+            System.out.println("Que veux tu faire?\n");
             // permet d'enlever la proposition d'utilisation du désintégrateur ( on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
             if (joueurCourant.nbrDesintegrateur!=0){
-                System.out.println("jouer un desintegrateur (d)");
+                System.out.println("Jouer un desintegrateur (d)");
             }
-            System.out.println("placer un jeton (p)");
-            System.out.println("récuperer un jeton (r)");
-            System.out.println("quitter (q)");
+            System.out.println("Placer un jeton (p)");
+            System.out.println("Récuperer un jeton (r)\n");
+            System.out.println("Quitter (q)");
             String action=sc.nextLine();
             
             //jeu d'un desintegrateur
@@ -130,11 +130,11 @@ public class Partie {
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
-                    while (colonneD<1 || colonneD>7){
+                    while (colonneD<0 || colonneD>6){
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         colonneD= sc.nextInt()-1;
                     }
-                    while (ligneD<1 || ligneD>7){
+                    while (ligneD<0 || ligneD>5){
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         ligneD= sc.nextInt()-1;
                     }
@@ -161,11 +161,11 @@ public class Partie {
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
-                    while (colonneD<1 || colonneD>7){
+                    while (colonneD<0 || colonneD>6){
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         colonneD= sc.nextInt()-1;
                     }
-                    while (ligneD<1 || ligneD>7){
+                    while (ligneD<0 || ligneD>5){
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         ligneD= sc.nextInt()-1;
                     }
@@ -175,11 +175,11 @@ public class Partie {
                         ligneD= sc.nextInt()-1;
                         System.out.print("colonne : ");
                         colonneD= sc.nextInt()-1;
-                        while (colonneD<1 || colonneD>7){
+                        while (colonneD<0 || colonneD>6){
                             System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                             colonneD= sc.nextInt()-1;
                         }
-                        while (ligneD<1 || ligneD>7){
+                        while (ligneD<0 || ligneD>5){
                             System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                             ligneD= sc.nextInt()-1;
                         }
@@ -201,7 +201,8 @@ public class Partie {
                     System.out.println("Où veux tu placer ton jeton?");
                     System.out.print("colonne : ");
                     int colonnej= sc.nextInt()-1;
-                    while (colonnej<1 || colonnej>7){
+                    // vérification de l'existence de la colonne
+                    while (colonnej<0 || colonnej>6){
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         colonnej= sc.nextInt()-1;
                     }
@@ -215,6 +216,10 @@ public class Partie {
                         System.out.println("Tu ne peux pas placer de jeton ici \nOù veux tu placer ton jeton?");
                         System.out.print("colonne : ");
                         colonnej= sc.nextInt()-1;
+                        while (colonnej<0 || colonnej>6){
+                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            colonnej= sc.nextInt()-1;
+                        }
                     }
                     joueurCourant.listeJetons[i]=null;
                     //recherche de la case d'ajout du jeton
