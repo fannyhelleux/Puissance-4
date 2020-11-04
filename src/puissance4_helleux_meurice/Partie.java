@@ -186,7 +186,7 @@ public class Partie {
                         i++;
                     }
                     joueurCourant.listeJetons[i]=grille.cellules[ligneD][colonneD].recupererJeton();
-                    grille.tasserGrille();
+                    grille.tasserGrille(colonneD);
                     compteur = 1;
                     
                 }
