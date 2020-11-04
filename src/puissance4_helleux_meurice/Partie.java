@@ -102,24 +102,27 @@ public class Partie {
     public void debuterPartie(){
         initialiserPartie();
         Scanner sc = new Scanner(System.in);
-        int nb= 0;     
+        int nb= 0;
+        int compteur=0;
         System.out.println(listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
         System.out.println(listeJoueurs[1].nom+ " est "+listeJoueurs[1].couleur);        
         while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
-            int compteur = 0; // permet de controler le changement de joueur
+            compteur = 0; // permet de controler le changement de joueur
             joueurCourant=listeJoueurs[nb%2];
             System.out.println("\n\nC'est à " + joueurCourant.nom + " de jouer!"); 
-            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur.\n");
+            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
             grille.afficherGrilleSurConsole();
-            System.out.println("Que veux tu faire?\n");
+            System.out.println("\nQue veux tu faire?\n");
             // permet d'enlever la proposition d'utilisation du désintégrateur ( on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
             if (joueurCourant.nbrDesintegrateur!=0){
                 System.out.println("Jouer un desintegrateur (d)");
             }
-            System.out.println("Placer un jeton (p)");
-            System.out.println("Récuperer un jeton (r)\n");
+            System.out.println("-> Placer un jeton (j)");
+            System.out.println("-> Récuperer un jeton (r)\n");
             System.out.println("Quitter (q)");
-            String action=sc.nextLine();
+ 
+            String action;
+            action = sc.nextLine();
             
             //jeu d'un desintegrateur
             if ("d".equals(action)){
@@ -149,11 +152,11 @@ public class Partie {
                     compteur=1;
                 }
                 else {
-                   System.out.println("Tu n'as plus de désintégrateur choisi une autre action!");
+                   System.out.println("Tu n'as pas de désintégrateur choisis une autre action!");
                 }
             }
             
-            //recuperation d'un jeton
+            // récuperation d'un jeton :
             if ("r".equals(action)){
                 if (joueurCourant.listeJetons.length<21){
                     System.out.println("Quel jeton veux tu récuperer?");
@@ -196,13 +199,14 @@ public class Partie {
             }
             
             //placement d'un jeton
-             if ("p".equals(action)){
+             if ("j".equals(action)){
                 if (joueurCourant.listeJetons.length>0){
                     System.out.println("Où veux tu placer ton jeton?");
                     System.out.print("colonne : ");
+                    // String colonnej = sc.next(); // !!!!!!!!!!! faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
                     int colonnej= sc.nextInt()-1;
-                    // vérification de l'existence de la colonne
-                    while (colonnej<0 || colonnej>6){
+                    // Vérification de l'existence de la colonne
+                    while (colonnej<0 || colonnej>6){ // mais ici je sais pas dire "colonnej n'appartient pas a ("1","2",...,"5")
                         System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
                         colonnej= sc.nextInt()-1;
                     }
@@ -211,7 +215,7 @@ public class Partie {
                     while (joueurCourant.listeJetons[i]==null){
                         i--;
                     }
-                    //vérification de l'ajout du jeton
+                    // vérification de l'ajout du jeton
                     while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i], colonnej)==false){
                         System.out.println("Tu ne peux pas placer de jeton ici \nOù veux tu placer ton jeton?");
                         System.out.print("colonne : ");
@@ -222,7 +226,7 @@ public class Partie {
                         }
                     }
                     joueurCourant.listeJetons[i]=null;
-                    //recherche de la case d'ajout du jeton
+                    // recherche de la case d'ajout du jeton
                     int lignej=0;
                     while (grille.cellules[lignej][colonnej]==null){
                         lignej++;
