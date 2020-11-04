@@ -92,7 +92,7 @@ public class Cellule {
         else {
             return false;
         }    
-    }//eeeeeefefzd,sji,fijenrjfnsjf,jnrejnfsjnf,rksjrnf,sjnfrkjfnjnfkd,sfjre
+    }// saluut
     
     public boolean activerTrouNoir(){
         if (jetonCourant!= null && trouNoir==true){
