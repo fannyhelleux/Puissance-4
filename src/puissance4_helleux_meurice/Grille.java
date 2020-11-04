@@ -189,9 +189,9 @@ public class Grille {
         return jeton;
     }
     
-    public void tasserGrille(){
+    public void tasserGrille(int ){
         jeton(i,j);
-        While (i<=5){
-            grille(i,j)=grille(i+1,j);
+       while (i<=1){
+            cellules[i][j]=cellules[i+1][j];
         }
 }
