@@ -190,6 +190,8 @@ public class Grille {
     }
     
     public void tasserGrille(){
-        int p=0;
-    }
+        jeton(i,j);
+        While (i<=5){
+            grille(i,j)=grille(i+1,j);
+        }
 }
