@@ -103,10 +103,13 @@ public class Partie {
         initialiserPartie();
         Scanner sc = new Scanner(System.in);
         int nb= 0;     
+        System.out.println(listeJoueurs[0]+ " est "+listeJoueurs[0].couleur);
+        System.out.println(listeJoueurs[1]+ " est "+listeJoueurs[1].couleur);        
         while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
             int compteur = 0; // permet de controler le changement de joueur
             joueurCourant=listeJoueurs[nb%2];
             System.out.println("\n\nC'est à " + joueurCourant.nom + " de jouer!"); 
+            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur.");
             grille.afficherGrilleSurConsole();
             System.out.println("Que veux tu faire?");
             // permet d'enlever la proposition d'utilisation du désintégrateur ( on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
@@ -142,7 +145,7 @@ public class Partie {
                         System.out.print("colonne : ");
                         colonneD= sc.nextInt()-1;
                     }
-                    grille.tasserGrille();
+                    grille.tasserGrille(colonneD);
                     compteur=1;
                 }
                 else {
@@ -226,7 +229,7 @@ public class Partie {
                     }
                     if (grille.cellules[lignej][colonnej].presenceTrouNoir()){
                         grille.cellules[lignej][colonnej].activerTrouNoir();
-                        grille.tasserGrille();
+                        grille.tasserGrille(colonnej);
                         System.out.println("Tu as activé un trou noir...");
                     }
                     compteur=1;
