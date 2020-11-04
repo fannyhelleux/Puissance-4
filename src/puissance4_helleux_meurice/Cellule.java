@@ -92,7 +92,7 @@ public class Cellule {
         else {
             return false;
         }    
-    }// saluut
+    }
     
     public boolean activerTrouNoir(){
         if (jetonCourant!= null && trouNoir==true){

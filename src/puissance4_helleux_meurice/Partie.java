@@ -127,6 +127,14 @@ public class Partie {
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
+                    while (colonneD<1 || colonneD>7){
+                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        colonneD= sc.nextInt()-1;
+                    }
+                    while (ligneD<1 || ligneD>7){
+                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        ligneD= sc.nextInt()-1;
+                    }
                     while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur) || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
                         System.out.println("Tu ne peux pas utiliser de désintégrateur sur cette case \nOù veux tu placer ton désintégrateur?");
                         System.out.print("ligne : ");
@@ -150,12 +158,28 @@ public class Partie {
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
+                    while (colonneD<1 || colonneD>7){
+                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        colonneD= sc.nextInt()-1;
+                    }
+                    while (ligneD<1 || ligneD>7){
+                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        ligneD= sc.nextInt()-1;
+                    }
                     while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur)==false || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
                         System.out.println("Tu ne peux pas récuperer de jeton ici \nQuel jeton veux tu récuperer?");
                         System.out.print("ligne : ");
                         ligneD= sc.nextInt()-1;
                         System.out.print("colonne : ");
                         colonneD= sc.nextInt()-1;
+                        while (colonneD<1 || colonneD>7){
+                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            colonneD= sc.nextInt()-1;
+                        }
+                        while (ligneD<1 || ligneD>7){
+                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            ligneD= sc.nextInt()-1;
+                        }
                     }
                     int i=0;
                     while (joueurCourant.listeJetons[i]!=null){
@@ -174,6 +198,10 @@ public class Partie {
                     System.out.println("Où veux tu placer ton jeton?");
                     System.out.print("colonne : ");
                     int colonnej= sc.nextInt()-1;
+                    while (colonnej<1 || colonnej>7){
+                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        colonnej= sc.nextInt()-1;
+                    }
                     // détermination du jeton à placer
                     int i=20;
                     while (joueurCourant.listeJetons[i]==null){
@@ -201,7 +229,7 @@ public class Partie {
                         grille.tasserGrille();
                         System.out.println("Tu as activé un trou noir...");
                     }
-                    compteur= 1;
+                    compteur=1;
                 }
                 else{
                     System.out.println("Tu n'as plus de jetons... Choisis une autre action!");
