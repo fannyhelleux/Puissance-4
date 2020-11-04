@@ -189,19 +189,19 @@ public class Grille {
         return jeton;
     }
     
-    // On fait un programme qui parcours les lignes de la colonne a tasser (de numéro j) dès qu'il trouve une cellule null dans la colonne,
+    // On fait un programme qui parcours les lignes de la colonne a tasser (de numéro j) dès qu'il trouve une cellule nulle dans la colonne,
     // il l'échange avec celle de la cellule du dessus. Ainsi elle finit par se retrouver en haut 
     public void tasserGrille(int j){
         int a=0; // a va permettre de savoir si on a besoin de refaire monter des valeures nulles (si il y en a 2 d'un coup par ex)
         while (a==0){
-            for (int i=0; i<=4;i++){ // on va que jusqu'a la 4 eme ligne car si on doit tasser la colonne, la ligne 5 sera forcement null.
-                if (cellules[i][j]==null & i<=4){
+            for (int i=5; i<=1;i--){ // on va que jusqu'a la 5 eme ligne car si on doit tasser la colonne, la ligne 6 sera forcement nulle.
+                if (cellules[i][j]==null ){
                     cellules[i][j]=cellules[i+1][j];
-                    cellules[i+1][j]=null;
-                    a=0;
+                    cellules[0][j]=null;
+                    a=1;
                 }
             }
-            for (int i=0; i<=4;i++){  // cas où on ai 2 valeures nulles dans la colonne.
+            for (int i=5; i<=1;i--){  // cas où on ai 2 valeures nulles dans la colonne.
                 if (cellules[i][j]==null && cellules[i+1][j]!=null){
                     a=0;
                 }
