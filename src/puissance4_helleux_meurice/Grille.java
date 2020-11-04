@@ -21,13 +21,7 @@ public class Grille {
         while (cellules[i][colonne]!=null && i>0){
             i--;
         }
-        if (i>=0){
-            cellules[i][colonne].affecterJeton(jeton);
-            return true;
-        }
-        else {
-            return false;
-        }
+        return cellules[i][colonne].affecterJeton(jeton);
     }
     
     // verifie que chaque case de chaque ligne est vide
@@ -209,4 +203,3 @@ public class Grille {
         }
     }
 }
-// scqsfqdcsqdc

@@ -155,7 +155,7 @@ public class Partie {
             
             //recuperation d'un jeton
             if ("r".equals(action)){
-                if (joueurCourant.listeJetons.length<21){
+                if (joueurCourant.listeJetons.length<20){
                     System.out.println("Quel jeton veux tu récuperer?");
                     System.out.print("ligne : ");
                     int ligneD= sc.nextInt()-1;
@@ -192,6 +192,9 @@ public class Partie {
                     grille.tasserGrille(colonneD);
                     compteur = 1;
                     
+                }
+                else{
+                    System.out.println("Désolé mais tu n'as pas de jeton à récupérer...");
                 }
             }
             
