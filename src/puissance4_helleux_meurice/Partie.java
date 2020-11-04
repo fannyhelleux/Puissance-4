@@ -199,6 +199,7 @@ public class Partie {
                     if (grille.cellules[lignej][colonnej].presenceTrouNoir()){
                         grille.cellules[lignej][colonnej].activerTrouNoir();
                         grille.tasserGrille();
+                        System.out.println("Tu as activé un trou noir...");
                     }
                     compteur= 1;
                 }
