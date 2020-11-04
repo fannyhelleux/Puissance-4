@@ -198,7 +198,7 @@ public class Grille {
                 if (cellules[i][j]==null & i<=4){
                     cellules[i][j]=cellules[i+1][j];
                     cellules[i+1][j]=null;
-                    a=0;
+                a=1;
                 }
             }
             for (int i=0; i<=4;i++){  // cas où on ai 2 valeures nulles dans la colonne.
