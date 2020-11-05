@@ -20,7 +20,7 @@ public class Cellule {
         trouNoir= false;
         desintegrateur=false;
     }
-    //Fonction permettant l'affectation d'un jeton à une cellule retournant si l'ajout c'est bien passé
+    //Fonction permettant l'affectation d'un jeton à une cellule retournant true si l'ajout est possible, faux autrement
     public boolean affecterJeton(Jeton jetonAjoute){
         if (jetonCourant==null){
             jetonCourant=jetonAjoute;
