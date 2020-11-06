@@ -60,7 +60,6 @@ public class Partie {
             }
         }
         
-        
         //positionnement des cinq trou noir
         i=0;
         int tabCooTrouNoir[][]= new int[5][2];
@@ -103,11 +102,10 @@ public class Partie {
         initialiserPartie();
         Scanner sc = new Scanner(System.in);
         int nb= 0;
-        int compteur=0;
         System.out.println(listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
         System.out.println(listeJoueurs[1].nom+ " est "+listeJoueurs[1].couleur);        
         while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
-            compteur = 0; // permet de controler le changement de joueur
+            int compteur = 0; // permet de controler le changement de joueur
             joueurCourant=listeJoueurs[nb%2];
             System.out.println("\n\nC'est à " + joueurCourant.nom + " de jouer!"); 
             System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
@@ -217,6 +215,7 @@ public class Partie {
                     int i=20;
                     while (joueurCourant.listeJetons[i]==null){
                         i--;
+                        System.out.println(i);
                     }
                     // vérification de l'ajout du jeton
                     while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i], colonnej)==false){
