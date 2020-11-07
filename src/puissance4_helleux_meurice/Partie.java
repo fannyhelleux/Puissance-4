@@ -107,40 +107,43 @@ public class Partie {
         while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
             int compteur = 0; // permet de controler le changement de joueur
             joueurCourant=listeJoueurs[nb%2];
-            System.out.println("\n\nC'est à " + joueurCourant.nom + " de jouer!"); 
+            System.out.println("\n\nC'est au tour de " + joueurCourant.nom); 
             System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
             grille.afficherGrilleSurConsole();
-            System.out.println("\nQue veux tu faire?\n");
-            // permet d'enlever la proposition d'utilisation du désintégrateur ( on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
-            if (joueurCourant.nbrDesintegrateur!=0){
-                System.out.println("Jouer un desintegrateur (d)");
-            }
+
+            
             System.out.println("-> Placer un jeton (j)");
             System.out.println("-> Récuperer un jeton (r)\n");
+            // permet d'enlever la proposition d'utilisation du désintégrateur (on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
+            if (joueurCourant.nbrDesintegrateur!=0){
+                System.out.println("-> Jouer un desintegrateur (d)");
+            }
             System.out.println("Quitter (q)");
  
-            String action;
-            action = sc.nextLine();
             
-            //jeu d'un desintegrateur
+            String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux, c'est peut etre une demi pute...
+            
+            System.out.println("action"+action+"."+"compteur"+compteur+"nb"+nb);
+            
+            // jeu d'un desintegrateur
             if ("d".equals(action)){
                 // permet de décrémenter le nmbre de désintégrateur et évite au joueur d'utiliser des désintégrateur qu'il n'as pas 
                 if (joueurCourant.utiliserDesintegrateur()==true){
-                    System.out.println("Où veux tu placer ton désintégrateur?");
+                    System.out.println("Où veux-tu donc placer ton désintégrateur ?");
                     System.out.print("ligne : ");
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
                     while (colonneD<0 || colonneD>6){
-                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)");
                         colonneD= sc.nextInt()-1;
                     }
                     while (ligneD<0 || ligneD>5){
-                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                         ligneD= sc.nextInt()-1;
                     }
                     while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur) || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
-                        System.out.println("Tu ne peux pas utiliser de désintégrateur sur cette case \nOù veux tu placer ton désintégrateur?");
+                        System.out.println("Tu ne peux guère utiliser de désintégrateur sur cette case \nOù veux-tu placer ton désintégrateur ?");
                         System.out.print("ligne : ");
                         ligneD= sc.nextInt()-1;
                         System.out.print("colonne : ");
@@ -150,24 +153,24 @@ public class Partie {
                     compteur=1;
                 }
                 else {
-                   System.out.println("Tu n'as pas de désintégrateur choisis une autre action!");
+                   System.out.println("Tu n'as aucun désintégrateurs, choisis une autre action !");
                 }
             }
             
             // récuperation d'un jeton :
             if ("r".equals(action)){
                 if (joueurCourant.listeJetons.length<20){
-                    System.out.println("Quel jeton veux tu récuperer?");
+                    System.out.println("Quel jeton veux-tu récuperer?");
                     System.out.print("ligne : ");
                     int ligneD= sc.nextInt()-1;
                     System.out.print("colonne : ");
                     int colonneD= sc.nextInt()-1;
                     while (colonneD<0 || colonneD>6){
-                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                         colonneD= sc.nextInt()-1;
                     }
                     while (ligneD<0 || ligneD>5){
-                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        System.out.println("Cette ligne n'existe pas... (Elles vont de 1 à 7)");
                         ligneD= sc.nextInt()-1;
                     }
                     while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur)==false || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
@@ -177,11 +180,11 @@ public class Partie {
                         System.out.print("colonne : ");
                         colonneD= sc.nextInt()-1;
                         while (colonneD<0 || colonneD>6){
-                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                             colonneD= sc.nextInt()-1;
                         }
                         while (ligneD<0 || ligneD>5){
-                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            System.out.println("Cette ligne n'existe pas... (Elles vont de 1 à 7)");
                             ligneD= sc.nextInt()-1;
                         }
                     }
@@ -195,20 +198,20 @@ public class Partie {
                     
                 }
                 else{
-                    System.out.println("Désolé mais tu n'as pas de jeton à récupérer...");
+                    System.out.println("Toutes mes excuses, mais tu n'as aucun jetons à récupérer...");
                 }
             }
             
             //placement d'un jeton
-             if ("j".equals(action)){
+            if ("j".equals(action)){
                 if (joueurCourant.listeJetons.length>0){
-                    System.out.println("Où veux tu placer ton jeton?");
+                    System.out.println("Où veux-tu placer ton jeton ?");
                     System.out.print("colonne : ");
                     // String colonnej = sc.next(); // !!!!!!!!!!! faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
                     int colonnej= sc.nextInt()-1;
                     // Vérification de l'existence de la colonne
                     while (colonnej<0 || colonnej>6){ // mais ici je sais pas dire "colonnej n'appartient pas a ("1","2",...,"5")
-                        System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                        System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)");
                         colonnej= sc.nextInt()-1;
                     }
                     // détermination du jeton à placer
@@ -218,12 +221,12 @@ public class Partie {
                         System.out.println(i);
                     }
                     // vérification de l'ajout du jeton
-                    while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i], colonnej)==false){
-                        System.out.println("Tu ne peux pas placer de jeton ici \nOù veux tu placer ton jeton?");
+                    while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i],colonnej)==false){
+                        System.out.println("Tu ne peux pas placer de jeton ici \nOù veux-tu placer ton jeton ?");
                         System.out.print("colonne : ");
                         colonnej= sc.nextInt()-1;
                         while (colonnej<0 || colonnej>6){
-                            System.out.println("Cette colonne n'éxiste pas... (Elles vont de 1 à 7)");
+                            System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                             colonnej= sc.nextInt()-1;
                         }
                     }
@@ -241,7 +244,7 @@ public class Partie {
                     if (grille.cellules[lignej][colonnej].presenceTrouNoir()){
                         grille.cellules[lignej][colonnej].activerTrouNoir();
                         grille.tasserGrille(colonnej);
-                        System.out.println("Tu as activé un trou noir...");
+                        System.out.println("Tu as activé un trou noir... ");
                     }
                     compteur=1;
                 }
@@ -258,3 +261,21 @@ public class Partie {
         }
     }
 }
+// On peut mtn empiler les jetons mais l'erreur suivante s'affiche qd on remplis une ligne :
+
+// Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
+//	at puissance4_helleux_meurice.Grille.etreGagnantePourJoueur(Grille.java:97)
+//	at puissance4_helleux_meurice.Partie.debuterPartie(Partie.java:110)
+//	at puissance4_helleux_meurice.Puissance4_Helleux_Meurice.main(Puissance4_Helleux_Meurice.java:56)
+// /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:1330: The following error occurred while executing this line:
+// /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:936: Java returned: 1
+
+// On peut pas jouer sur la i=5 ligne : Jte laisse guetter pq l'erreur dit etregagnantprjoueur il doit y avoir un i<5 ou quoi 
+// mais j'ai la flemme de comprendre tes boucles, jss sur que tu peux comprendre
+
+// Quand on écris le nom des joueurs trop vite (genre on ecrit le deuxieme avant que ca ait print " quel est le nom du 2eme) ça skip l'entrée
+// CEST PEUT ETRE LE MEME PROBLEME QUE LE TRUC QUI AFFICHE DEUX FOIS !!!!!
+
+// PAS BESOIN DE TESTER :
+// désintegrer un jeton marche, le nombre de des revient bien a 0 apres utilisation
+// Les trous noirs fonctionnent aussi

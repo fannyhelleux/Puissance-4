@@ -15,12 +15,13 @@ public class Grille {
         cellules= new Cellule[6][7];
     }
     
-    // On vérifie toutes les lignes de la colonne selectionnée (de bas en haut), si une cellule de cette colonne ne possède pas de jetons, on return true et le jeton sera attribué à cette cellule. Autrement, on return false car la colonne est pleine.
+    // On vérifie toutes les lignes de la colonne selectionnée (de bas en haut), si une cellule de cette colonne ne possède pas de jetons, on return true et le jeton sera attribué à cette cellule. Autrement, on return false quand la colonne est pleine.
     public boolean ajouterJetonDansColonne (Jeton jeton, int colonne){
-        int i=5;
-        while (cellules[i][colonne]!=null && i>0){
-            i--;
+        int i=0;
+        while (cellules[i][colonne].jetonCourant!=null && i<6){
+            i++;
         }
+        // ici, i n'est plus forcément 0, il est la ligne la plus basse innocupée.
         return cellules[i][colonne].affecterJeton(jeton);
     }
     
