@@ -259,8 +259,18 @@ public class Partie {
                 nb++;
             }
         }
+        if (grille.etreGagnantePourJoueur(listeJoueurs[0])){
+                    System.out.println("Bravo!! "+listeJoueurs[0]+" tu as gagné!!!");
+        }
+        if (grille.etreGagnantePourJoueur(listeJoueurs[1])){
+                    System.out.println("Bravo!! "+listeJoueurs[1]+" tu as gagné!!!");
+        }
+        if (grille.etreRemplie())
+        System.out.println("Vous etes tous nuls vous avez perdus.");
     }
 }
+
+
 // On peut mtn empiler les jetons mais l'erreur suivante s'affiche qd on remplis une ligne :
 
 // Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
