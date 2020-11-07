@@ -207,15 +207,15 @@ public class Partie {
                 if (joueurCourant.listeJetons.length>0){
                     System.out.println("Où veux-tu placer ton jeton ?");
                     System.out.print("colonne : ");
-                    // String colonnej = sc.next(); // !!!!!!!!!!! faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
+                    // String colonnej = sc.next(); // d'un pt de vue optimal faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
                     int colonnej= sc.nextInt()-1;
                     // Vérification de l'existence de la colonne
-                    while (colonnej<0 || colonnej>6){ // mais ici je sais pas dire "colonnej n'appartient pas a ("1","2",...,"5")
-                        System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)");
+                    while (colonnej<0 || colonnej>6){
+                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                         colonnej= sc.nextInt()-1;
                     }
                     // détermination du jeton à placer
-                    int i=20;
+                    int i=20; // 21 jetons mais pour le prgrm, le 0 en est aussi un donc i=20
                     while (joueurCourant.listeJetons[i]==null){
                         i--;
                     }
@@ -285,3 +285,7 @@ public class Partie {
 // PAS BESOIN DE TESTER :
 // désintegrer un jeton marche, le nombre de des revient bien a 0 apres utilisation
 // Les trous noirs fonctionnent aussi
+
+// probleme pour quitter (break pas ouf)
+
+//

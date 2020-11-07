@@ -84,17 +84,17 @@ public class Grille {
     // Verifie si le joueur entré en paramètre est gagnant en sondant les cellules de la grille pour trouver une combinaison gagnante des jetons de sa couleur
     public boolean etreGagnantePourJoueur(joueur Michel){
         String couleurtest= Michel.couleur;
-        for (int i=0;i<4;i++){
-            // test dans le quart haut gauche de la grille car seul ici on peut avoir le premier jeton d'une combinaison gagnante
-            for (int j=0;j<5;j++){
-                //test des lignes
+        for (int i=0;i<3;i++){
+            // test dans le quart bas gauche de la grille car seul ici on peut avoir le premier jeton d'une combinaison gagnante
+            for (int j=0;j<4;j++){
+                //test des colonne
                 if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j].jetonCourant!=null && cellules[i+2][j].jetonCourant!=null && cellules[i+3][j].jetonCourant!=null){
                     if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j].jetonCourant.couleur.equals(couleurtest)){
-                     return true;
+                        return true;
                     }
                 }
                 
-                //test des colonnes
+                //test des lignes
                 if (cellules[i][j].jetonCourant!=null &&cellules[i][j+1].jetonCourant!=null && cellules[i][j+2].jetonCourant!=null && cellules[i][j+3].jetonCourant!=null){
                     if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+3].jetonCourant.couleur.equals(couleurtest)){
                         return true;
@@ -107,9 +107,9 @@ public class Grille {
                     }
                 }
             }
-            // test dans le quart haut gauche (seulement possibilité de colonne)
-            for (int j=4;j<8;j++){
-                if (j+3<8){
+            // test dans le quart bas droite (seulement possibilité de colonne)
+            for (int j=4;j<7;j++){
+                if (j+3<7){
                     if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j+1].jetonCourant!=null && cellules[i+2][j+2].jetonCourant!=null && cellules[i+3][j+3].jetonCourant!=null){               
                         if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+3].jetonCourant.couleur.equals(couleurtest)){
                             return true;
@@ -190,7 +190,7 @@ public class Grille {
         int a=0; // a va permettre de savoir si on a besoin de refaire monter des valeures nulles (si il y en a 2 d'un coup par ex)
         while (a==0){
             for (int i=5; i<=1;i--){ // on va que jusqu'a la 5 eme ligne car si on doit tasser la colonne, la ligne 6 sera forcement nulle.
-                if (cellules[i][j]==null ){
+                if (cellules[i][j]==null){
                     cellules[i][j]=cellules[i+1][j];
                     cellules[0][j]=null;
                 }
