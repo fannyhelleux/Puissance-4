@@ -110,15 +110,15 @@ public class Partie {
             System.out.println("\n\nC'est au tour de " + joueurCourant.nom); 
             System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
             grille.afficherGrilleSurConsole();
-            System.out.println("nb jeton: "+joueurCourant.listeJetons.length);
+            System.out.println("nb jeton: "+joueurCourant.listeJetons.length+"\n");
             
             System.out.println("-> Placer un jeton (j)");
-            System.out.println("-> Récuperer un jeton (r)\n");
+            System.out.println("-> Récuperer un jeton (r)");
             // permet d'enlever la proposition d'utilisation du désintégrateur (on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
             if (joueurCourant.nbrDesintegrateur!=0){
                 System.out.println("-> Jouer un desintegrateur (d)");
             }
-            System.out.println("Quitter (q)");
+            System.out.println("\nQuitter (q)");
             
             
             String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux
@@ -278,7 +278,9 @@ public class Partie {
 // probleme pour quitter (break pas ouf)
 
 //          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
-//          On peut pas placer de desintegrateur sur la ligne 1...
+//          On peut pas placer de desintegrateur sur la ligne 1...Ah si jcrois bref tester
 //          Tasser grille tasse pas la grille
 // Finis :  Ca print tjrs 2 fois le menu de jeu 
-//          Ca ramasse plus les desintegrateurs
+//          Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
+//              -> (i=1;j=3)==ca marche
+//                 (i=4,j=2)==ca marche ap

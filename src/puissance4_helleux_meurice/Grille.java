@@ -198,15 +198,15 @@ public class Grille {
     public void tasserGrille(int j){
         int a=0; // a va permettre de savoir si on a besoin de refaire monter des valeures nulles (si il y en a 2 d'un coup par ex)
         while (a==0){
-            for (int i=5; i<=1;i--){ // on va que jusqu'a la 5 eme ligne car si on doit tasser la colonne, la ligne 6 sera forcement nulle.
-                if (cellules[i][j]==null){
-                    cellules[i][j]=cellules[i+1][j];
-                    cellules[0][j]=null;
+            for (int i=4; i<=0;i--){ // on va que jusqu'a la 4 eme ligne car si on doit tasser la colonne, la ligne 6 sera forcement nulle.
+                if (cellules[i][j].jetonCourant==null){
+                    cellules[i][j].jetonCourant=cellules[i+1][j].jetonCourant;
+                    cellules[i+1][j].jetonCourant=null;
                 }
             }
             a=1;
-            for (int i=5; i<=1;i--){  // cas où on ai 2 valeures nulles dans la colonne.
-                if (cellules[i][j]==null && cellules[i+1][j]!=null){
+            for (int i=4; i<=0;i--){  // cas où on ai 2 valeures nulles dans la colonne.
+                if (cellules[i][j].jetonCourant==null && cellules[i+1][j].jetonCourant!=null){
                     a=0;
                 }
             }
