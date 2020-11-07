@@ -119,12 +119,14 @@ public class Partie {
                 System.out.println("-> Jouer un desintegrateur (d)");
             }
             System.out.println("Quitter (q)");
- 
             
-            String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux, c'est peut etre une demi pute...
             
-            //System.out.println("action"+action+"."+"compteur"+compteur+"nb"+nb);
+            String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux
             
+            while (action.equals("")){ // on a fait ça car de temps a autre action="".
+                action = sc.nextLine();
+            }
+
             // jeu d'un desintegrateur
             if ("d".equals(action)){
                 // permet de décrémenter le nmbre de désintégrateur et évite au joueur d'utiliser des désintégrateur qu'il n'as pas 
@@ -262,10 +264,10 @@ public class Partie {
             }
         }
         if (grille.etreGagnantePourJoueur(listeJoueurs[0])){
-                    System.out.println("Bravo!! "+listeJoueurs[0]+" tu as gagné!!!");
+                    System.out.println("Bravo!! "+listeJoueurs[0]+" as gagné!!!");
         }
         if (grille.etreGagnantePourJoueur(listeJoueurs[1])){
-                    System.out.println("Bravo!! "+listeJoueurs[1]+" tu as gagné!!!");
+                    System.out.println("Bravo!! "+listeJoueurs[1]+" as gagné!!!");
         }
         if (grille.etreRemplie())
         System.out.println("Vous etes tous nuls vous avez perdus.");
@@ -273,19 +275,10 @@ public class Partie {
 }
 
 
-// On peut mtn empiler les jetons mais l'erreur suivante s'affiche qd on remplis une ligne :
-
-// Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
-//	at puissance4_helleux_meurice.Grille.etreGagnantePourJoueur(Grille.java:97)
-//	at puissance4_helleux_meurice.Partie.debuterPartie(Partie.java:110)
-//	at puissance4_helleux_meurice.Puissance4_Helleux_Meurice.main(Puissance4_Helleux_Meurice.java:56)
-// /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:1330: The following error occurred while executing this line:
-// /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:936: Java returned: 1
-
-// PAS BESOIN DE TESTER :
-// désintegrer un jeton marche, le nombre de des revient bien a 0 apres utilisation
-// Les trous noirs fonctionnent aussi
-
 // probleme pour quitter (break pas ouf)
 
-//
+//          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
+//          On peut pas placer de desintegrateur sur la ligne 1...
+//          Tasser grille tasse pas la grille
+// Finis :  Ca print tjrs 2 fois le menu de jeu 
+//          Ca ramasse plus les desintegrateurs
