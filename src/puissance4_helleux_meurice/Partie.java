@@ -110,7 +110,7 @@ public class Partie {
             System.out.println("\n\nC'est au tour de " + joueurCourant.nom); 
             System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
             grille.afficherGrilleSurConsole();
-
+            System.out.println("nb jeton: "+joueurCourant.listeJetons.length);
             
             System.out.println("-> Placer un jeton (j)");
             System.out.println("-> Récuperer un jeton (r)\n");
@@ -123,7 +123,7 @@ public class Partie {
             
             String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux, c'est peut etre une demi pute...
             
-            System.out.println("action"+action+"."+"compteur"+compteur+"nb"+nb);
+            //System.out.println("action"+action+"."+"compteur"+compteur+"nb"+nb);
             
             // jeu d'un desintegrateur
             if ("d".equals(action)){
@@ -218,8 +218,9 @@ public class Partie {
                     int i=20;
                     while (joueurCourant.listeJetons[i]==null){
                         i--;
-                        System.out.println(i);
                     }
+                    System.out.println(i);
+
                     // vérification de l'ajout du jeton
                     while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i],colonnej)==false){
                         System.out.println("Tu ne peux pas placer de jeton ici \nOù veux-tu placer ton jeton ?");
@@ -231,6 +232,7 @@ public class Partie {
                         }
                     }
                     joueurCourant.listeJetons[i]=null;
+                    System.out.println(joueurCourant.listeJetons[i]);
                     // recherche de la case d'ajout du jeton
                     int lignej=0;
                     while (grille.cellules[lignej][colonnej]==null){
@@ -279,12 +281,6 @@ public class Partie {
 //	at puissance4_helleux_meurice.Puissance4_Helleux_Meurice.main(Puissance4_Helleux_Meurice.java:56)
 // /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:1330: The following error occurred while executing this line:
 // /Users/matthieumeurice/Desktop/Puissance-4/nbproject/build-impl.xml:936: Java returned: 1
-
-// On peut pas jouer sur la i=5 ligne : Jte laisse guetter pq l'erreur dit etregagnantprjoueur il doit y avoir un i<5 ou quoi 
-// mais j'ai la flemme de comprendre tes boucles, jss sur que tu peux comprendre
-
-// Quand on écris le nom des joueurs trop vite (genre on ecrit le deuxieme avant que ca ait print " quel est le nom du 2eme) ça skip l'entrée
-// CEST PEUT ETRE LE MEME PROBLEME QUE LE TRUC QUI AFFICHE DEUX FOIS !!!!!
 
 // PAS BESOIN DE TESTER :
 // désintegrer un jeton marche, le nombre de des revient bien a 0 apres utilisation
