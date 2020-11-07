@@ -88,42 +88,51 @@ public class Grille {
             // test dans le quart bas gauche de la grille car seul ici on peut avoir le premier jeton d'une combinaison gagnante
             for (int j=0;j<4;j++){
                 //test des colonne
-                if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j].jetonCourant!=null && cellules[i+2][j].jetonCourant!=null && cellules[i+3][j].jetonCourant!=null){
+                if (cellules[i][j].jetonCourant!=null && cellules[i+1][j].jetonCourant!=null && cellules[i+2][j].jetonCourant!=null && cellules[i+3][j].jetonCourant!=null){
                     if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j].jetonCourant.couleur.equals(couleurtest)){
                         return true;
                     }
                 }
                 
                 //test des lignes
-                if (cellules[i][j].jetonCourant!=null &&cellules[i][j+1].jetonCourant!=null && cellules[i][j+2].jetonCourant!=null && cellules[i][j+3].jetonCourant!=null){
+                if (cellules[i][j].jetonCourant!=null && cellules[i][j+1].jetonCourant!=null && cellules[i][j+2].jetonCourant!=null && cellules[i][j+3].jetonCourant!=null){
                     if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+3].jetonCourant.couleur.equals(couleurtest)){
                         return true;
                     }
                 }
-                //test des diagonales
-                if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j+1].jetonCourant!=null && cellules[i+2][j+2].jetonCourant!=null && cellules[i+3][j+3].jetonCourant!=null){
+                //test des diagonales de bas gauche vers haut droit
+                if (cellules[i][j].jetonCourant!=null && cellules[i+1][j+1].jetonCourant!=null && cellules[i+2][j+2].jetonCourant!=null && cellules[i+3][j+3].jetonCourant!=null){
                     if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j+3].jetonCourant.couleur.equals(couleurtest)){
                         return true;
                     }
                 }
             }
-            // test dans le quart bas droite (seulement possibilité de colonne)
-            for (int j=4;j<7;j++){
-                if (j+3<7){
-                    if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j+1].jetonCourant!=null && cellules[i+2][j+2].jetonCourant!=null && cellules[i+3][j+3].jetonCourant!=null){               
-                        if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+3].jetonCourant.couleur.equals(couleurtest)){
+            // test dans le quart bas droite (seulement possibilité de colonne et de diagonales de bas droite vers haut gauche)
+            for (int j=3;j<7;j++){
+                
+                    // test des diagonales qui vont de en bas a droite vers en haut a gauche
+                    if (cellules[i][j].jetonCourant!=null && cellules[i+1][j-1].jetonCourant!=null && cellules[i+2][j-2].jetonCourant!=null && cellules[i+3][j-3].jetonCourant!=null){               
+                        if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j-1].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j-2].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j-3].jetonCourant.couleur.equals(couleurtest)){
                             return true;
                         }
                     }
-                }
+                    
+                    //test des colonnes
+                    if (j>3){ // On évite de refaire la meme colonne 2 fois
+                        if (cellules[i][j].jetonCourant!=null && cellules[i+1][j].jetonCourant!=null && cellules[i+2][j].jetonCourant!=null && cellules[i+3][j].jetonCourant!=null){
+                            if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j].jetonCourant.couleur.equals(couleurtest)){
+                                return true;
+                            }
+                        }
+                    }
             }
         }
-        
-        // test du quart bas gauche (seulement possibilité de lignes)
+        // à ce niveau toutes les colonnes sont vérifiées ainsi que toutes les diagonales
+        // test du quart haut droit (seulement possibilité de ligne)
         for (int i=3;i<6;i++){
-            for (int j=0;j<5;j++){
-                if (cellules[i][j].jetonCourant!=null &&cellules[i+1][j].jetonCourant!=null && cellules[i+2][j].jetonCourant!=null && cellules[i+3][j].jetonCourant!=null){                
-                    if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+1][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+2][j].jetonCourant.couleur.equals(couleurtest) && cellules[i+3][j].jetonCourant.couleur.equals(couleurtest)){
+            for (int j=0;j<4;j++){
+                if (cellules[i][j].jetonCourant!=null &&cellules[i][j+1].jetonCourant!=null && cellules[i][j+2].jetonCourant!=null && cellules[i][j+3].jetonCourant!=null){                
+                    if (cellules[i][j].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+1].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+2].jetonCourant.couleur.equals(couleurtest) && cellules[i][j+3].jetonCourant.couleur.equals(couleurtest)){
                         return true;
                     }
                 }
