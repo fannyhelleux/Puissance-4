@@ -348,13 +348,3 @@ public class Partie {
         }
     }
 }
-
-
-// Finis :  probleme pour quitter (break pas ouf)
-// Finis :  Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
-// Finis :  On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
-// Finis :  Tasser grille tasse pas la grille
-// Finis :  Ca print tjrs 2 fois le menu de jeu 
-// Finis :  Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
-// Finis :  Faire une ptite pause qd on a cop un désintégrateur et qd on tombe sur un trou noir.
-// Finis :  nbr de jeton immuables.
