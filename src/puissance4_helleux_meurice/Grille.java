@@ -29,7 +29,7 @@ public class Grille {
     public boolean etreRemplie(){
         for (int i=0;i<6;i++){
             for (int j=0;j<7;i++){
-                if (cellules[i][j]==null){
+                if (cellules[i][j].jetonCourant==null){
                     return false;
                 }
             }
@@ -197,12 +197,9 @@ public class Grille {
     // il l'échange avec celle de la cellule du dessus. Ainsi elle finit par se retrouver en haut 
     public void tasserGrille(int j){
         int a=0; // a va permettre de savoir si on a besoin de refaire monter des valeures nulles (si il y en a 2 d'un coup par ex)
-        System.out.println("entrée dans tassergrille");
         while (a==0){
-            System.out.println("while");
             for (int i=4; i<=0;i--){ // on va que jusqu'a la 4 eme ligne car si on doit tasser la colonne, la ligne 6 sera forcement nulle.
                 if (cellules[i][j].jetonCourant==null){
-                    System.out.println("while for if changemnt");
                     cellules[i][j].jetonCourant=cellules[i+1][j].jetonCourant;
                     cellules[i+1][j].jetonCourant=null;
                 }

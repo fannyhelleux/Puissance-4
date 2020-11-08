@@ -109,13 +109,14 @@ public class Partie {
         int pdj=0; //meme chose si "j" mais plus de jetons.
         
         int quitter=0;
-        System.out.println(listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
+        boolean quitterbool = false;
+        System.out.println("\n"+listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
         System.out.println(listeJoueurs[1].nom+ " est "+listeJoueurs[1].couleur);        
         
-        while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false & grille.etreGagnantePourJoueur(listeJoueurs[1])==false & grille.etreRemplie()==false & quitter==0){
+        while((grille.etreGagnantePourJoueur(listeJoueurs[0])==false & grille.etreGagnantePourJoueur(listeJoueurs[1])==false & grille.etreRemplie()==false & quitterbool==false)==true){
+            
             compteur = 0;
             joueurCourant=listeJoueurs[nb%2];
-            System.out.println(quitter);
 // affichage de la console et des propositions d'action :
             System.out.println("\n\nA toi de jouer : " + joueurCourant.nom+"\n");
             
@@ -145,6 +146,7 @@ public class Partie {
                 pdj=0;
             }
 // demande de l'action :
+            System.out.println("Choix : ");
             String action = sc.nextLine(); // visiblement cette instruction se faisait sauter 1 fois sur deux
             while (action.equals("")){ // donc on a fait ça car de temps a autre action="".
                 action = sc.nextLine();
@@ -285,6 +287,13 @@ public class Partie {
             if (compteur==1){ // si une action a été effectuer alors le compteur sera à 1 et permettra le changement de joueur
                 nb++;
             }
+            
+            if (quitter==0){ //change le paramètre quitterbool pour qu'on quitte le while si un joueur le veut.
+                quitterbool=false;
+            }
+            else{
+                quitterbool=true;
+            }
         }
         if (grille.etreGagnantePourJoueur(listeJoueurs[0])){
                     System.out.println("Bravo!! "+listeJoueurs[0]+" as gagné!!!");
@@ -292,8 +301,9 @@ public class Partie {
         if (grille.etreGagnantePourJoueur(listeJoueurs[1])){
                     System.out.println("Bravo!! "+listeJoueurs[1]+" as gagné!!!");
         }
-        if (grille.etreRemplie())
-        System.out.println("Vous etes tous nuls vous avez perdus.");
+        if (grille.etreRemplie()){
+            System.out.println("Vous etes tous nuls vous avez perdus.");
+        }
     }
 }
 
