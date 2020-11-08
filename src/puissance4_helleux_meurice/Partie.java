@@ -157,18 +157,21 @@ public class Partie {
                 // permet de décrémenter le nmbre de désintégrateur et évite au joueur d'utiliser des désintégrateur qu'il n'as pas 
                 if (joueurCourant.utiliserDesintegrateur()==true){
                     System.out.println("Où veux-tu donc placer ton désintégrateur ?");
+                    
                     System.out.print("ligne : ");
                     int ligneD= sc.nextInt()-1;
-                    System.out.print("colonne : ");
-                    int colonneD= sc.nextInt()-1;
-                    while (colonneD<0 || colonneD>6){
-                        System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)");
-                        colonneD= sc.nextInt()-1;
-                    }
-                    while (ligneD<0 || ligneD>5){
-                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
+                    while ((ligneD>=0 & ligneD<=5)==false){
+                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)\nRessaisis là");
                         ligneD= sc.nextInt()-1;
                     }
+                    
+                    System.out.print("colonne : ");
+                    int colonneD= sc.nextInt()-1;
+                    while ((colonneD>=0 & colonneD<=6)==false){
+                        System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)\nRessaisis là");
+                        colonneD= sc.nextInt()-1;
+                    }
+                    
                     while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur) || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
                         System.out.println("Tu ne peux guère utiliser de désintégrateur sur cette case \nOù veux-tu placer ton désintégrateur ?");
                         System.out.print("ligne : ");
@@ -327,13 +330,10 @@ public class Partie {
 }
 
 
-// probleme pour quitter (break pas ouf)
-
+// Finis :  probleme pour quitter (break pas ouf)
 //          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
 //          On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
 //          Tasser grille tasse pas la grille
 // Finis :  Ca print tjrs 2 fois le menu de jeu 
-//          Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
-//              -> (i=1;j=3)==ca marche
-//                 (i=4,j=2)==ca marche ap
-//          Faire une ptite pause qd on a cop un désintégrateur.
+// Finis :  Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
+// Finis :  Faire une ptite pause qd on a cop un désintégrateur et qd on tombe sur un trou noir.

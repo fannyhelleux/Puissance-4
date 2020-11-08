@@ -28,7 +28,7 @@ public class Grille {
     // verifie que chaque case de chaque ligne est vide
     public boolean etreRemplie(){
         for (int i=0;i<6;i++){
-            for (int j=0;j<7;i++){
+            for (int j=0;j<7;j++){
                 if (cellules[i][j].jetonCourant==null){
                     return false;
                 }
