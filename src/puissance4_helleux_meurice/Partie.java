@@ -102,32 +102,55 @@ public class Partie {
         initialiserPartie();
         Scanner sc = new Scanner(System.in);
         int nb= 0;
+        int compteur = 0; // permet de controler le changement de joueur.
+        
+        int dmaispasd = 0; // permet d'afficher un msg d'erreur si "d" mais pas de desintegrateur.
+        int rmaispasdej=0; // meme chose si joueur veut jouer "r" mais a pas de jetons a récuperer.
+        int pdj=0; //meme chose si "j" mais plus de jetons.
+        
+        int quitter=0;
         System.out.println(listeJoueurs[0].nom+ " est "+listeJoueurs[0].couleur);
         System.out.println(listeJoueurs[1].nom+ " est "+listeJoueurs[1].couleur);        
-        while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false||grille.etreGagnantePourJoueur(listeJoueurs[1])==false||grille.etreRemplie()==false){
-            int compteur = 0; // permet de controler le changement de joueur
+        
+        while(grille.etreGagnantePourJoueur(listeJoueurs[0])==false & grille.etreGagnantePourJoueur(listeJoueurs[1])==false & grille.etreRemplie()==false & quitter==0){
+            compteur = 0;
             joueurCourant=listeJoueurs[nb%2];
-            System.out.println("\n\nC'est au tour de " + joueurCourant.nom); 
-            System.out.println("Tu as "+joueurCourant.nbrDesintegrateur+" désintégrateur(s).\n");
+            System.out.println(quitter);
+// affichage de la console et des propositions d'action :
+            System.out.println("\n\nA toi de jouer : " + joueurCourant.nom+"\n");
+            
             grille.afficherGrilleSurConsole();
-            System.out.println("nb jeton: "+joueurCourant.listeJetons.length+"\n");
+            
+            System.out.println("\n"+"nb Jeton: "+joueurCourant.listeJetons.length);
+            System.out.println("nb Desintegrateurs: "+joueurCourant.nbrDesintegrateur+"\n");
             
             System.out.println("-> Placer un jeton (j)");
             System.out.println("-> Récuperer un jeton (r)");
-            // permet d'enlever la proposition d'utilisation du désintégrateur (on garde tout de meme la boucle de vérification plus tard en cas d'erreur du joueur)  
-            if (joueurCourant.nbrDesintegrateur!=0){
+            if (joueurCourant.nbrDesintegrateur!=0){ // n'affiche que cette option si elle est possible.
                 System.out.println("-> Jouer un desintegrateur (d)");
             }
-            System.out.println("\nQuitter (q)");
+            System.out.println("-> Quitter (q)\n");
             
-            
-            String action = sc.nextLine(); // visiblement cette instruction se fait sauter 1 fois sur deux
-            
-            while (action.equals("")){ // on a fait ça car de temps a autre action="".
+// msg d'erreurs en cas d'erreurs:
+            if (dmaispasd==1){
+                System.out.println("Tu n'as aucun désintégrateurs, choisis une autre action !");
+                dmaispasd=0;
+            }
+            if (rmaispasdej==1){
+                System.out.println("Tu n'as aucun jetons à récupérer, choisis une autre action !");
+                rmaispasdej=0;
+            }
+            if (pdj==1){
+                System.out.println("Tu n'as plus de jetons, choisis une autre action!");
+                pdj=0;
+            }
+// demande de l'action :
+            String action = sc.nextLine(); // visiblement cette instruction se faisait sauter 1 fois sur deux
+            while (action.equals("")){ // donc on a fait ça car de temps a autre action="".
                 action = sc.nextLine();
             }
 
-            // jeu d'un desintegrateur
+// "d" : jeu d'un desintegrateur
             if ("d".equals(action)){
                 // permet de décrémenter le nmbre de désintégrateur et évite au joueur d'utiliser des désintégrateur qu'il n'as pas 
                 if (joueurCourant.utiliserDesintegrateur()==true){
@@ -155,11 +178,11 @@ public class Partie {
                     compteur=1;
                 }
                 else {
-                   System.out.println("Tu n'as aucun désintégrateurs, choisis une autre action !");
+                   dmaispasd = 1;
                 }
             }
             
-            // récuperation d'un jeton :
+// "r" : récuperation d'un jeton :
             if ("r".equals(action)){
                 if (joueurCourant.listeJetons.length<20){
                     System.out.println("Quel jeton veux-tu récuperer?");
@@ -200,11 +223,11 @@ public class Partie {
                     
                 }
                 else{
-                    System.out.println("Toutes mes excuses, mais tu n'as aucun jetons à récupérer...");
+                    rmaispasdej=1;
                 }
             }
             
-            //placement d'un jeton
+// "j" : placement d'un jeton
             if ("j".equals(action)){
                 if (joueurCourant.listeJetons.length>0){
                     System.out.println("Où veux-tu placer ton jeton ?");
@@ -253,11 +276,11 @@ public class Partie {
                     compteur=1;
                 }
                 else{
-                    System.out.println("Tu n'as plus de jetons... Choisis une autre action!");
+                    pdj=1;
                 }
             }
             if ("q".equals(action)){
-                break;
+                quitter=1;
             }
             if (compteur==1){ // si une action a été effectuer alors le compteur sera à 1 et permettra le changement de joueur
                 nb++;
@@ -278,7 +301,7 @@ public class Partie {
 // probleme pour quitter (break pas ouf)
 
 //          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
-//          On peut pas placer de desintegrateur sur la ligne 1...Ah si jcrois bref tester
+//          On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
 //          Tasser grille tasse pas la grille
 // Finis :  Ca print tjrs 2 fois le menu de jeu 
 //          Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
