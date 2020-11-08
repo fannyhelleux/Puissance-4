@@ -255,11 +255,16 @@ public class Partie {
                     // String colonnej = sc.next(); // d'un pt de vue optimal faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
                     int colonnej= sc.nextInt()-1;
                     
+                    //System.out.println(colonnej>=0);
+                    //System.out.println(colonnej<=6);
+                    //System.out.println(grille.cellules[5][colonnej].jetonCourant==null);
+                    //System.out.println((colonnej>=0 && colonnej<=6 && grille.cellules[5][colonnej].jetonCourant==null));
                     // Vérification de l'existence de la colonne
-                    while (colonnej<0 || colonnej>6){
-                        System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
+                    while ((colonnej>=0 && colonnej<=6 && grille.cellules[5][colonnej].jetonCourant==null)==false){
+                        System.out.println("Mauvaise saisie ! Recommencez :");
                         colonnej= sc.nextInt()-1;
                     }
+
                     // détermination du jeton à placer dans la liste de jeton 
                     int i=20; // 21 jetons mais pour le prgrm, le 0 en est aussi un donc i=20
                     while (joueurCourant.listeJetons[i]==null){
@@ -346,9 +351,9 @@ public class Partie {
 
 
 // Finis :  probleme pour quitter (break pas ouf)
-//          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
+// Finis :  Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
 // Finis :  On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
-//          Tasser grille tasse pas la grille
+// Finis :  Tasser grille tasse pas la grille
 // Finis :  Ca print tjrs 2 fois le menu de jeu 
 // Finis :  Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
 // Finis :  Faire une ptite pause qd on a cop un désintégrateur et qd on tombe sur un trou noir.
