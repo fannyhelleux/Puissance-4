@@ -72,9 +72,14 @@ public class Grille {
         }
     }
     
-    // On effectue un test sur la présence d'un objet dans la colonne et on retourne le résultat de ce test
+    // renvoie vrai si la cellule de coordonnées données est occupée par un jeton.
     public boolean celluleOccupee(int ligne, int colonne){
-        return cellules[ligne][colonne] != null;
+        if (cellules[ligne][colonne].jetonCourant!= null){
+            return true; 
+        }
+        else {
+            return false;
+        }
     }
     
     public String lireCouleurDuJeton( int i, int j){

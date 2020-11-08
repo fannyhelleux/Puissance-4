@@ -105,7 +105,7 @@ public class Partie {
         int compteur = 0; // permet de controler le changement de joueur.
         
         int dmaispasd = 0; // permet d'afficher un msg d'erreur si "d" mais pas de desintegrateur.
-        int rmaispasdej=0; // meme chose si joueur veut jouer "r" mais a pas de jetons a récuperer.
+        int rmaispasdej=0; // meme chose si joueur veut jouer "r" mais ne peut pas récupérer de jetons.
         int pdj=0; //meme chose si "j" mais plus de jetons.
         
         int quitter=0;
@@ -122,7 +122,11 @@ public class Partie {
             
             grille.afficherGrilleSurConsole();
             
-            System.out.println("\n"+"nb Jeton: "+joueurCourant.listeJetons.length);
+            int nbj=21;
+            while (joueurCourant.listeJetons[nbj-1]==null){
+                nbj=nbj-1;
+            }
+            System.out.println("\n"+"nb Jeton: "+nbj);
             System.out.println("nb Desintegrateurs: "+joueurCourant.nbrDesintegrateur+"\n");
             
             System.out.println("-> Placer un jeton (j)");
@@ -138,7 +142,7 @@ public class Partie {
                 dmaispasd=0;
             }
             if (rmaispasdej==1){
-                System.out.println("Tu n'as aucun jetons à récupérer, choisis une autre action !");
+                System.out.println("Tu ne peut pas récupérer de jetons, choisis une autre action !");
                 rmaispasdej=0;
             }
             if (pdj==1){
@@ -172,13 +176,24 @@ public class Partie {
                         colonneD= sc.nextInt()-1;
                     }
                     
-                    while ((joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur) || grille.cellules[ligneD][colonneD].supprimerJeton()== false){
+                    while ((grille.celluleOccupee(ligneD,colonneD) && (!(joueurCourant.couleur).equals(grille.cellules[ligneD][colonneD].jetonCourant.couleur)) )== false){
                         System.out.println("Tu ne peux guère utiliser de désintégrateur sur cette case \nOù veux-tu placer ton désintégrateur ?");
+                        
                         System.out.print("ligne : ");
                         ligneD= sc.nextInt()-1;
+                        while ((ligneD>=0 & ligneD<=5)==false){
+                            System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)\nRessaisis là");
+                            ligneD= sc.nextInt()-1;
+                        }
+                        
                         System.out.print("colonne : ");
                         colonneD= sc.nextInt()-1;
+                        while ((colonneD>=0 & colonneD<=6)==false){
+                            System.out.println("Cette colonne n'existe point... (Elles vont de 1 à 7)\nRessaisis là");
+                            colonneD= sc.nextInt()-1;
+                        }
                     }
+                    grille.cellules[ligneD][colonneD].supprimerJeton();
                     grille.tasserGrille(colonneD);
                     compteur=1;
                 }
@@ -248,7 +263,7 @@ public class Partie {
                     // détermination du jeton à placer dans la liste de jeton 
                     int i=20; // 21 jetons mais pour le prgrm, le 0 en est aussi un donc i=20
                     while (joueurCourant.listeJetons[i]==null){
-                        i--;
+                        i=i-1;
                     }
                     
                 // dans l'ordre : désintégrateur ?; ajout du jeton; trou noir ?
@@ -281,6 +296,7 @@ public class Partie {
                             colonnej= sc.nextInt()-1;
                         }
                     }
+                    joueurCourant.listeJetons[i]=null; //le jeton est ajouté, on le supprime de la liste
                     
                     // Trou noir ?
                     if (grille.cellules[lignei][colonnej].presenceTrouNoir()==true){
@@ -296,7 +312,6 @@ public class Partie {
                         } 
                     }
                     
-                    joueurCourant.listeJetons[i]=null;
                     compteur=1;
                 }
                 else{
@@ -318,10 +333,10 @@ public class Partie {
             }
         }
         if (grille.etreGagnantePourJoueur(listeJoueurs[0])){
-                    System.out.println("Bravo!! "+listeJoueurs[0]+" as gagné!!!");
+                    System.out.println("\n\n\n\nBravo!! "+listeJoueurs[0].nom+" as gagné!!!\n\n\n\n");
         }
         if (grille.etreGagnantePourJoueur(listeJoueurs[1])){
-                    System.out.println("Bravo!! "+listeJoueurs[1]+" as gagné!!!");
+                    System.out.println("\n\n\n\nBravo!! "+listeJoueurs[1].nom+" as gagné!!!\n\n\n\n");
         }
         if (grille.etreRemplie()){
             System.out.println("Vous etes tous nuls vous avez perdus.");
@@ -332,8 +347,9 @@ public class Partie {
 
 // Finis :  probleme pour quitter (break pas ouf)
 //          Alors si une colonne est pleine et qu'on met un jeton dessus y'a une erreur qui nous fais tej
-//          On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
+// Finis :  On peut pas placer de desintegrateur sur la ligne 1... Ah si jcrois bref tester
 //          Tasser grille tasse pas la grille
 // Finis :  Ca print tjrs 2 fois le menu de jeu 
 // Finis :  Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
 // Finis :  Faire une ptite pause qd on a cop un désintégrateur et qd on tombe sur un trou noir.
+// Finis :  nbr de jeton immuables.
