@@ -236,19 +236,39 @@ public class Partie {
                     System.out.print("colonne : ");
                     // String colonnej = sc.next(); // d'un pt de vue optimal faudrait remplacer l'entrée colonnej en String et pas prendre des int pcq sinon ça affiche une erreur qui fait quitter la partie
                     int colonnej= sc.nextInt()-1;
+                    
                     // Vérification de l'existence de la colonne
                     while (colonnej<0 || colonnej>6){
                         System.out.println("Cette colonne n'existe pas... (Elles vont de 1 à 7)");
                         colonnej= sc.nextInt()-1;
                     }
-                    // détermination du jeton à placer
+                    // détermination du jeton à placer dans la liste de jeton 
                     int i=20; // 21 jetons mais pour le prgrm, le 0 en est aussi un donc i=20
                     while (joueurCourant.listeJetons[i]==null){
                         i--;
                     }
-                    System.out.println(i);
-
-                    // vérification de l'ajout du jeton
+                    
+                // dans l'ordre : désintégrateur ?; ajout du jeton; trou noir ?
+                    // Recherhce de la ligne la plus basse innocupée ?
+                    int lignei=0;
+                    while (grille.cellules[lignei][colonnej].jetonCourant!=null & lignei<6){
+                        lignei=lignei+1;
+                    }
+                    // Désintégrateur ?
+                    if (grille.cellules[lignei][colonnej].presenceDesintegrateur()==true){
+                        joueurCourant.obtenirDesintegrateur();
+                        grille.cellules[lignei][colonnej].recupererDesintegrateur();
+                        System.out.println("\n\n\n\nBravo "+ joueurCourant.nom +"! Tu as réussi à obtenir un nouveau désintégrateur!\n            (message temporaire)\n\n\n\n");
+                        // Pause de 4s = 4000 millisecondes 
+                        int millis = 4000;
+                        try {
+                            Thread.sleep(millis);
+                        } catch (InterruptedException ie) {
+                            // ...
+                        } 
+                    }
+                    
+                    // Ajout du jeton :
                     while (grille.ajouterJetonDansColonne(joueurCourant.listeJetons[i],colonnej)==false){
                         System.out.println("Tu ne peux pas placer de jeton ici \nOù veux-tu placer ton jeton ?");
                         System.out.print("colonne : ");
@@ -258,23 +278,22 @@ public class Partie {
                             colonnej= sc.nextInt()-1;
                         }
                     }
-                    joueurCourant.listeJetons[i]=null;
-                    System.out.println(joueurCourant.listeJetons[i]);
-                    // recherche de la case d'ajout du jeton
-                    int lignej=0;
-                    while (grille.cellules[lignej][colonnej]==null){
-                        lignej++;
-                    }
-                    if (grille.cellules[lignej][colonnej].presenceDesintegrateur()){
-                        joueurCourant.obtenirDesintegrateur();
-                        grille.cellules[lignej][colonnej].recupererDesintegrateur();
-                        System.out.println("Tu as réussi à obtenir un nouveau désintégrateur!");
-                    }
-                    if (grille.cellules[lignej][colonnej].presenceTrouNoir()){
-                        grille.cellules[lignej][colonnej].activerTrouNoir();
+                    
+                    // Trou noir ?
+                    if (grille.cellules[lignei][colonnej].presenceTrouNoir()==true){
+                        grille.cellules[lignei][colonnej].activerTrouNoir();
                         grille.tasserGrille(colonnej);
-                        System.out.println("Tu as activé un trou noir... ");
+                        System.out.println("\n\n\n\nDommage "+ joueurCourant.nom +"! Tu as activé un trou Noir...\n            (message temporaire)\n\n\n\n");
+                        // Pause de 4s = 4000 millisecondes 
+                        int millis = 4000;
+                        try {
+                            Thread.sleep(millis);
+                        } catch (InterruptedException ie) {
+                            // ...
+                        } 
                     }
+                    
+                    joueurCourant.listeJetons[i]=null;
                     compteur=1;
                 }
                 else{
@@ -317,3 +336,4 @@ public class Partie {
 //          Ca ramasse plus les desintegrateurs, enfin j'ai l'impression que c'est pas le cas partout ex pas pour (i=3;j=7)
 //              -> (i=1;j=3)==ca marche
 //                 (i=4,j=2)==ca marche ap
+//          Faire une ptite pause qd on a cop un désintégrateur.
